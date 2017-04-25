@@ -18,6 +18,12 @@ lea           dest        ,[op]     ;dest <-- adresse de op (load effective addr
 push          op                    ;decremente [rsp de 8] et ajoute op sur la pile de taille qword (64bits)
 pop           op                    ;incremente [rsp de 8] et retire op de la pile de taille qword (64bits)
 
+lea           esi,        [input]   ;(1)ESI = address input_string
+lea           edi,        [output]  ;(2)ESI = address input_string
+movsb                               ;(3)copy 1 byte from [ESI] to [EDI]
+movsw                               ;(3)copy 2 byte from [ESI] to [EDI
+movsd                               ;(3)copy 4 byte from [ESI] to [EDI
+
 ;OPERATORS (fini par "sd" si (double)) (fini par "ss" si (float))
 add           op1         ,op2                    ;op1 <-- op1 + op2
 sub           op1         ,op2                    ;op1 <-- op1 - op2

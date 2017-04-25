@@ -7,13 +7,9 @@ length     db             0
 
 section .text
 global _ft_bzero
-;extern _ft_bzero
-
 global _ft_puts
-;extern _ft_puts
-
 global _ft_strlen
-;extern _ft_strlen
+global _ft_isalpha
 ;global start
 
 ;start:
@@ -36,8 +32,7 @@ global _ft_strlen
 _ft_bzero:
 push	        rbp
 mov           r8          ,rdi      ;r8 = le text
-call          _ft_strlen            ;cherche la longueur du text dans rdi
-mov           r9          ,rax      ;r9 = len
+mov           r9          ,rsi      ;r9 = len
 mov           rax         ,0
 while1:   cmp rax,r9                ;cmp i, len
           jge  endwhile1            ;si i >= len
@@ -70,20 +65,52 @@ endwhile:
 pop           rbp
 ret
 
-_ft_isalpha:
+_ft_islower:
 push	        rbp
-mov           rax         ,0
-while:    cmp byte[rdi + rax] ,0  ;cmp arg[i], 0
-          je  endwhile            ;si arg[i] == 0
-          inc rax                 ;incremente index rax
-          jmp while               ;relancement de la while
-endwhile:
+cmp rdi ,'z'                  ;if (c > 'z')
+    jg  isnotlower
+cmp rdi ,'a'                  ;if (c < 'a')
+    jl  isnotlower
+islower:
+mov rax       ,1
+pop           rbp
+ret
+isnotlower:
+mov rax       ,0
 pop           rbp
 ret
 
+_ft_isupper:
+push	        rbp
+cmp rdi ,'Z'                  ;if (c > 'Z')
+    jg  isnotlower
+cmp rdi ,'A'                  ;if (c < 'A')
+    jl  isnotlower
+isupper:
+mov rax       ,1
+pop           rbp
+ret
+isnotupper:
+mov rax       ,0
+pop           rbp
+ret
 
-;push	rbp				     ; Set up a new stack frame
-;mov		rbp, rsp
+_ft_isalpha:
+push	        rbp
+call _ft_islower
+mov   r10,    rax
+call _ft_isupper
+mov   r11,    rax
 
-;mov		rsp, rbp		; Remove stack frame and return
-;pop		rbp
+cmp r10 , 1
+    je isalpha
+cmp r11 , 1
+    je isalpha
+isnotalpha:
+mov rax       ,0
+pop           rbp
+ret
+isalpha:
+mov rax       ,1
+pop           rbp
+ret

@@ -49,7 +49,8 @@ VIF   ;Virtual Interrupt Flag (bit 19)
 VIP   ;Virtual Interrupt Pending (bit 20)
 ID    ;Identification Flag (bit 21)
 ;-------------------------------------------------------------------------------
-
+;general registers 128bits
+xmm0, xmm1, xmm2, ..., xmm15
 ;64bits registrers (63:0):
 rax, rbx, rcx, rdx, rdi, rsi, rbp, rsp,  r8,  r9, ...,  r15, rflags
 ;32bits registrers (31:0):

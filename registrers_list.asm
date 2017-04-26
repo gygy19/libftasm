@@ -1,26 +1,22 @@
 ;Intel x64 Assembly Registers Infos By jguyet@student.42.fr
 ;-------------------------------------------------------------------------------
-rax     ;registre general, accumulateur, contient la valeur de retour des fonctions
+rax     ;contient la valeur de retour des fonctions
 ;-------------------------------------------------------------------------------
 rbx     ;registre general
 ;-------------------------------------------------------------------------------
-rcx     ;registre general, compteur de boucle
+rcx     ;compteur de boucle
 ;-------------------------------------------------------------------------------
-rdx     ;registre general, partie haute d’une valeur 128 bits
+rdx     ;partie haute d’une valeur 128 bits
 ;-------------------------------------------------------------------------------
-rsi     ;registre general, adresse source pour d´eplacement ou comparaison
+rsi     ;argv[1]
 ;-------------------------------------------------------------------------------
-rdi     ;registre general, adresse destination pour d´eplacement ou comparaison
+rdi     ;argv[0]
 ;-------------------------------------------------------------------------------
-rsp     ;registre general, pointeur de pile (stack pointer)
+rsp     ;pointeur de pile (stack pointer)
 ;-------------------------------------------------------------------------------
-rbp     ;registre general, pointeur de base (base pointer)
+rbp     ;pointeur de base (base pointer)
 ;-------------------------------------------------------------------------------
-r8      ;registre general
-;-------------------------------------------------------------------------------
-r9      ;registre general
-;-------------------------------------------------------------------------------
-r15     ;registre general
+r8 ..., r15  ;registre general
 ;-------------------------------------------------------------------------------
 rip     ;registre general
 ;-------------------------------------------------------------------------------

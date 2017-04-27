@@ -60,11 +60,41 @@ static int		test_bzero(void)
 		txt_error_info("bzero(st1, 9)");
 	ft_bzero(s2, 9);
 	bzero(st2, 9);
-	erreur = memcmp(s2, st2, 14);
+	erreur = memcmp(s2, st2, 9);
 	if (!erreur)
 		reussi++;
 	else
 		txt_error_info("bzero(st2, 9)");
+	return (reussi);
+}
+
+static int		test_strcat(void)
+{
+	int		reussi = 0;
+	char src[50], dest[50], src2[50], dest2[50];
+
+	strcpy(src,  "This is source");
+	strcpy(dest, "This is destination");
+	strcpy(src2,  "This is source");
+	strcpy(dest2, "This is destination");
+  ft_putstr(dest);
+  ft_putstr("\n");
+	if (!strcmp(strcat(dest, src), strcat(dest2, src2)))
+  {
+    ft_putstr(dest);
+    ft_putstr("\n");
+		reussi++;
+  }
+	else
+		txt_error_info("!ft_strcmp(strncat(dest, src), strncat(dest2, src2))");
+	strcpy(src,  "Ththth");
+	strcpy(dest, "Ththth");
+	strcpy(src2,  "Ththth");
+	strcpy(dest2, "Ththth");
+	if (!strcmp(strcat(dest, src), strcat(dest2, src2)))
+		reussi++;
+	else
+		txt_error_info("!ft_strcmp(strncat(dest, src), strncat(dest2, src2))");
 	return (reussi);
 }
 
@@ -248,11 +278,38 @@ static void		Start(void)
 		txt_good("ft_tolower..", nbr, 300);
 	else
 		txt_error("ft_tolower...Total Error !");
+    /*******strcat*******/
+	if ((nbr = test_strcat()))
+		txt_good("ft_strcat...", nbr, 2);
+	else
+		txt_error("ft_strcat...Total Error !");
+
+    char *test = malloc(10);
+    char *test2 = malloc(15);
+    test[0] = '1';
+    test[1] = '\0';
+    test2[0] = '2';
+    test2[0] = '\0';
+    ft_strcat(test, test2);
+    ft_putstr(test);
 }
 
 int		main(void)
 {
-	Start();
-
+	//Start();
+  /*char *test = malloc(7);
+  test[0] = '5';
+  test[1] = '\0';
+  ft_strcat(test, "Hello");
+  int i = 0;
+  while (i < 10){
+    printf("%c\n", test[i]);
+    i++;
+  }*/
+  ft_puts("test");
+  char *coucou = malloc(100);
+  char *res = ft_strcat(coucou, "");
+  ft_strcat(res, "Test aaaaaa bbbbbbb");
+  ft_puts(res);
 	return (0);
 }

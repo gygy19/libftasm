@@ -36,7 +36,7 @@ neg           reg                                 ;reg <-- -reg
 and           op1         ,op2                    ;op1 <-- op1 & op2
 or            op1         ,op2                    ;op1 <-- op1 | op2
 xor           op1         ,op2                    ;op1 <-- op1 ^ op2
-not           reg                                 ;reg <-- ˜reg
+not           reg                                 ;reg <-- reverse bits of reg
 shl           reg         ,op2                    ;reg <-- reg << op2
 shr           reg         ,op2                    ;reg <-- reg >> op2
 sal           reg         ,op2                    ;reg <-- reg << op2

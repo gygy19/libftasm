@@ -306,10 +306,11 @@ int		main(void)
     printf("%c\n", test[i]);
     i++;
   }*/
-  ft_puts("test");
-  char *coucou = malloc(100);
-  char *res = ft_strcat(coucou, "");
-  ft_strcat(res, "Test aaaaaa bbbbbbb");
-  ft_puts(res);
+  char *coucou = ft_strdup("loldgrwgrgergrehrhhehhreh");
+
+  printf("%s\n", coucou);
+  //ft_memset(coucou, 'a', 5);
+  //ft_memcpy(coucou, "salut", 5);
+  //ft_puts(res);
 	return (0);
 }

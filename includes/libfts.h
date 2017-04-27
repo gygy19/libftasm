@@ -26,5 +26,8 @@ int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 char	     *ft_strcat(char *s1, const char *s2);
+void	     *ft_memset(void *b, int c, int len);
+void	     *ft_memcpy(void *dest, void const *src, int n);
+char		   *ft_strdup(const char *s1);
 
 #endif

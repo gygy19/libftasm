@@ -1,7 +1,7 @@
 ;/* ************************************************************************** */
 ;/*                                                                            */
 ;/*                                                        :::      ::::::::   */
-;/*   ft_puts.s                                          :+:      :+:    :+:   */
+;/*   ft_putchar.s                                       :+:      :+:    :+:   */
 ;/*                                                    +:+ +:+         +:+     */
 ;/*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 ;/*                                                +#+#+#+#+#+   +#+           */
@@ -9,40 +9,34 @@
 ;/*                                                    ###   ########.fr       */
 ;/*                                                                            */
 ;/* ************************************************************************** */
+section .data
+char          db          1
+
 section .text
-global _ft_puts
+global _ft_putchar
 
-extern _ft_strlen
-extern _ft_putchar
-_ft_puts:
-;The function int ft_puts(const char *s) writes the string s, and a terminating newline character, to the
-;stream stdout.
+_ft_putchar:
 push	        rbp
-cmp           rdi, 0
-je            error
+push          rdi
+push          rdx
+push          rsi
+push          rax
+push          r8
 
-mov           rsi         ,rdi      ;(1)set le pointer a afficher
-call          _ft_strlen            ;cherche la longueur du text dans rdi
-mov           r10         ,rax
+mov           r8          ,char     ;r8 = addr of char
+mov           [r8 + 0]    ,rdi      ;r8[0] = arg0
+
 ;write(rdi, rsi, rdx)               ;write(fd, pointer, length)
-mov           rdx         ,r10      ;(2)set la longueur a afficher
+mov           rsi         ,r8       ;(1)set le pointer a afficher
 mov           rdi         ,1        ;(3)signifie un envoie dans stdout 1
+mov           rdx         ,1        ;(2)set la longueur a afficher
 mov           rax         ,0x2000004;(4)appel de la function system write et retour dans
 syscall                             ;(5)lancement de lappel de function system
 
-;Print '\n'
-mov           rdi         ,10
-call          _ft_putchar
-;RETURN VALUES
-;The functions int ft_puts(const char *s) return a nonnegative integer on success and EOF on error.
-add           r10         ,10
-mov           rax         ,r10      ;return length Of string + (EOF)
-pop           rbp
-ret
-error:
-;Print '\n'
-mov           rdi         ,10
-call          _ft_putchar
-mov           rax         ,10       ;return(EOF)
+pop           r8
+pop           rax
+pop           rsi
+pop           rdx
+pop           rdi
 pop           rbp
 ret

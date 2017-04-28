@@ -1,7 +1,7 @@
 ;/* ************************************************************************** */
 ;/*                                                                            */
 ;/*                                                        :::      ::::::::   */
-;/*   ft_memset.s                                        :+:      :+:    :+:   */
+;/*   ft_strnew.s                                        :+:      :+:    :+:   */
 ;/*                                                    +:+ +:+         +:+     */
 ;/*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 ;/*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,36 @@
 ;/*                                                                            */
 ;/* ************************************************************************** */
 section .text
-global _ft_memset
+global _ft_strnew
 
-_ft_memset:
-mov     r8,     rdi
+extern _malloc
+extern _ft_bzero
+_ft_strnew:
+push	        rbp
+push          r15
+push          r10
 
-cmp     rdx,    0   ;while (rdi[rcx] != 0)
-je      end
-mov     rax,    rsi ;rax = arg1
-mov     rcx,    rdx ;rcx = arg2
-cld                 ;rdi++;
-rep     stosb       ;*rdi = c
+mov     r15,   rdi          ;r15 = arg0
+inc     r15
 
-end:
-mov     rax,    r8  ;return (saved rdi);
+mov     r14,   rsi
+push    rax
+mov     rcx,  r15           ;arg0 = r14
+call    _malloc             ;call malloc
+mov     r10,  rax           ;r10 = malloc(r14);
+pop     rax
+mov     rsi,   r14
+
+push    rdi
+push    rsi
+mov     rsi,  r15
+mov     rdi,  r10
+call    _ft_bzero
+mov     rax,  r10
+pop     rsi
+pop     rdi
+
+pop           r10
+pop           r15
+pop           rbp
 ret

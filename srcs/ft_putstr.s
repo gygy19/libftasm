@@ -1,7 +1,7 @@
 ;/* ************************************************************************** */
 ;/*                                                                            */
 ;/*                                                        :::      ::::::::   */
-;/*   ft_memset.s                                        :+:      :+:    :+:   */
+;/*   ft_putstr.s                                        :+:      :+:    :+:   */
 ;/*                                                    +:+ +:+         +:+     */
 ;/*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 ;/*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,20 @@
 ;/*                                                                            */
 ;/* ************************************************************************** */
 section .text
-global _ft_memset
+global _ft_putstr
 
-_ft_memset:
-mov     r8,     rdi
+extern _ft_strlen
+_ft_putstr:
+push	        rbp
 
-cmp     rdx,    0   ;while (rdi[rcx] != 0)
-je      end
-mov     rax,    rsi ;rax = arg1
-mov     rcx,    rdx ;rcx = arg2
-cld                 ;rdi++;
-rep     stosb       ;*rdi = c
+mov           rsi         ,[rbp + 8]      ;(1)set le pointer a afficher
+call          _ft_strlen            ;cherche la longueur du text dans rdi
+mov           r10         ,rax
+;write(rdi, rsi, rdx)               ;write(fd, pointer, length)
+mov           rdi         ,1        ;(3)signifie un envoie dans stdout 1
+mov           rdx         ,r10      ;(2)set la longueur a afficher
+mov           rax         ,0x2000004;(4)appel de la function system write et retour dans
+syscall                             ;(5)lancement de lappel de function system
 
-end:
-mov     rax,    r8  ;return (saved rdi);
+pop           rbp
 ret

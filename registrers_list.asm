@@ -57,3 +57,10 @@ eax, ebx, ecx, edx, edi, esi, ebp, esp, r8d, r9d, ..., r15d, eflags
  ah,  bh,  ch,  dh
 ;8 bits low (7:0):
  al,  bl,  cl,  dl, dil, sil, bpl, spl, r8b, r9b, ..., r15b
+
+
+;data example stockage
+
+section	.data
+hello	db	"Hello, World!", 0
+len	  equ	$-hello

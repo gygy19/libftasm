@@ -23,7 +23,7 @@ lea           edi,        [output]  ;(2)ESI = address input_string
 movsb                               ;(3)copy 1 byte from [ESI] to [EDI]
 movsw                               ;(3)copy 2 byte from [ESI] to [EDI
 movsd                               ;(3)copy 4 byte from [ESI] to [EDI
-
+;100goctet 100gbits
 ;OPERATORS (fini par "sd" si (double)) (fini par "ss" si (float))
 add           op1         ,op2                    ;op1 <-- op1 + op2
 sub           op1         ,op2                    ;op1 <-- op1 - op2

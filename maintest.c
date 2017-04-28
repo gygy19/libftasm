@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <fcntl.h>
 
 #ifndef __COLOR__
 #define __COLOR__
@@ -28,11 +29,6 @@
 
 #endif
 
-void          ft_putstr(char *str)
-{
-  ft_puts(str);
-}
-
 static void		txt_error_info(char *s)
 {
 	ft_putstr(" ");
@@ -40,6 +36,36 @@ static void		txt_error_info(char *s)
 	ft_putstr(s);
 	ft_putstr(" ");
 	ft_putstr(C_NO);
+}
+
+static int		test_memset(void)
+{
+	int		erreur = 0;
+	int		reussi = 0;
+	char	s1[9] = ".........";
+	char	s2[15] = "......rgrgr...r";
+	char	*ss1, *ss2;
+
+	ss1 = ft_memset(s1, '-', 9);
+	erreur = memcmp(ss1, "---------", 9);
+	if (!erreur)
+		reussi++;
+	else
+		txt_error_info("memcmp(ss1, \"---------\", 9)");
+		//ft_putstr("\nla ->");
+		//ft_putstr(s2);
+		//ft_putstr("\n");
+	ss2 = ft_memset(s2, '-', 5);
+	//ft_putstr("\nla2 ->");
+	//ft_putstr(s2);
+	//ft_putstr("\n");
+	erreur = memcmp(ss2, "-----.rgrgr...r", 14);
+	if (!erreur)
+		reussi++;
+	else
+		txt_error_info("memcmp(ss2, \"-----.rgrgr...r\", 14)");
+
+	return (reussi);
 }
 
 static int		test_bzero(void)
@@ -68,6 +94,53 @@ static int		test_bzero(void)
 	return (reussi);
 }
 
+static int		test_memcpy(void)
+{
+	int		erreur = 0;
+	int		reussi = 0;
+	char	*s1 = malloc(sizeof(char) * 10);
+	char	*s2 = malloc(sizeof(char) * 15);
+	char	st1[9] = "ijd\0kjdno";
+	char	st2[14] = "";
+
+	ft_memcpy(s1, st1, 9);
+	erreur = memcmp(s1, st1, 9);
+	if (!erreur)
+		reussi++;
+	else
+		txt_error_info("ft_memcpy(s1, \"ijd\\0kjdno\", 9)");
+	ft_memcpy(s2, st2, 0);
+	erreur = memcmp(s2, st2, 0);
+	if (!erreur)
+		reussi++;
+	else
+		txt_error_info("ft_memcpy(s2, \"\", 0);");
+	return (reussi);
+}
+
+static int		test_strdup(void)
+{
+	int		reussi = 0;
+
+	if (!strcmp(ft_strdup("lololo"), strdup("lololo")))
+		reussi++;
+	else
+		txt_error_info("!ft_strcmp(ft_strdup(\"lololo\"), strdup(\"lololo\"))");
+	if (!strcmp(ft_strdup(""), strdup("")))
+		reussi++;
+	else
+		txt_error_info("!ft_strcmp(ft_strdup(\"\"), strdup(\"\"))");
+	if (!strcmp(ft_strdup("."), strdup(".")))
+		reussi++;
+	else
+		txt_error_info("!ft_strcmp(ft_strdup(\".\"), strdup(\".\"))");
+	if (!strcmp(ft_strdup(".egrgrhthtjdv\0"), strdup(".egrgrhthtjdv\0")))
+		reussi++;
+	else
+		txt_error_info("!ft_strcmp(ft_strdup(\".egrgrhthtjdv\\0\"), strdup(\".egrgrhthtjdv\\0\"))");
+	return (reussi);
+}
+
 static int		test_strcat(void)
 {
 	int		reussi = 0;
@@ -77,12 +150,8 @@ static int		test_strcat(void)
 	strcpy(dest, "This is destination");
 	strcpy(src2,  "This is source");
 	strcpy(dest2, "This is destination");
-  ft_putstr(dest);
-  ft_putstr("\n");
 	if (!strcmp(strcat(dest, src), strcat(dest2, src2)))
   {
-    ft_putstr(dest);
-    ft_putstr("\n");
 		reussi++;
   }
 	else
@@ -233,16 +302,31 @@ static void		Start(void)
 {
 	int nbr = 0;
 	printf("------Started Test Libfts.a------\n");
+	/*******memset*******/
+	if ((nbr = test_memset()))
+		txt_good("ft_memset...", nbr, 2);
+	else
+		txt_error("ft_memset...Total Error !");
 	/*******bzero*******/
 	if ((nbr = test_bzero()))
 		txt_good("ft_bzero...", nbr, 2);
 	else
 		txt_error("ft_bzero...Total Error !");
+		/*******memcpy*******/
+	if ((nbr = test_memcpy()))
+		txt_good("ft_memcpy...", nbr, 2);
+	else
+		txt_error("ft_memcpy...Total Error !");
 	/*******strlen*******/
 	if ((nbr = test_strlen()))
 		txt_good("ft_strlen...", nbr, 4);
 	else
 		txt_error("ft_strlen...Total Error !");
+		/*******strdup*******/
+	if ((nbr = test_strdup()))
+		txt_good("ft_strdup...", nbr, 4);
+	else
+		txt_error("ft_strdup...Total Error !");
 		/*******isalpha*******/
 	if ((nbr = test_isalpha()))
 		txt_good("ft_isalpha...", nbr, 300);
@@ -284,33 +368,10 @@ static void		Start(void)
 	else
 		txt_error("ft_strcat...Total Error !");
 
-    char *test = malloc(10);
-    char *test2 = malloc(15);
-    test[0] = '1';
-    test[1] = '\0';
-    test2[0] = '2';
-    test2[0] = '\0';
-    ft_strcat(test, test2);
-    ft_putstr(test);
 }
 
 int		main(void)
 {
-	//Start();
-  /*char *test = malloc(7);
-  test[0] = '5';
-  test[1] = '\0';
-  ft_strcat(test, "Hello");
-  int i = 0;
-  while (i < 10){
-    printf("%c\n", test[i]);
-    i++;
-  }*/
-  char *coucou = ft_strdup("loldgrwgrgergrehrhhehhreh");
-
-  printf("%s\n", coucou);
-  //ft_memset(coucou, 'a', 5);
-  //ft_memcpy(coucou, "salut", 5);
-  //ft_puts(res);
+	Start();
 	return (0);
 }

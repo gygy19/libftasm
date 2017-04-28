@@ -40,12 +40,19 @@ SRCBASE		=	\
 						ft_isprint.s																												\
 						ft_isascii.s																												\
 						ft_puts.s																														\
+						ft_putchar.s																												\
+						ft_putstr.s																													\
+						ft_putnbr.s																													\
 						ft_tolower.s																												\
 						ft_toupper.s																												\
 						ft_strcat.s																													\
 						ft_memset.s																													\
 						ft_memcpy.s																													\
 						ft_strdup.s																													\
+						ft_strndup.s																												\
+						ft_cat.s																														\
+						ft_strnew.s																													\
+						ft_strjoin.s																												\
 						ft_strlen.s
 
 
@@ -102,7 +109,7 @@ all2:
 	fi
 
 test: all2
-	gcc maintest.c $(OBJS) -I includes/ -L . -lfts -o test
+	gcc maintest.c $(OBJS) -I includes/ -L . -lfts -o test 
 	./test
 
 .PHONY: all clean fclean re

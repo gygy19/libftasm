@@ -1,7 +1,7 @@
 ;/* ************************************************************************** */
 ;/*                                                                            */
 ;/*                                                        :::      ::::::::   */
-;/*   ft_strdup.s                                        :+:      :+:    :+:   */
+;/*   ft_strndup.s                                       :+:      :+:    :+:   */
 ;/*                                                    +:+ +:+         +:+     */
 ;/*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 ;/*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,13 @@
 ;/*                                                                            */
 ;/* ************************************************************************** */
 section .text
-global _ft_strdup
+global _ft_strndup
 
 
 extern _malloc
-extern _ft_strlen
 extern _ft_memcpy
 
-_ft_strdup:
+_ft_strndup:
 push    rbp
 push    rdi
 push    rsi
@@ -26,10 +25,8 @@ push    r15
 push    r14
 push    r10
 
-mov     r15,   rdi
-
-call    _ft_strlen          ;ft_strlen(rdi);
-mov     r14,   rax          ;r14 = ft_strlen(arg0);
+mov     r15,   rdi          ;r15 = arg0
+mov     r14,   rsi          ;r14 = arg1
 
 mov     rcx,  r14           ;arg0 = r14
 call    _malloc             ;call malloc

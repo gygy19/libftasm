@@ -19,19 +19,13 @@ extern _ft_memcpy
 
 _ft_strdup:
 push    rbp
-push    rdi
-push    rsi
-push    rdx
-push    r15
-push    r14
-push    r10
 
 mov     r15,   rdi
 
 call    _ft_strlen          ;ft_strlen(rdi);
 mov     r14,   rax          ;r14 = ft_strlen(arg0);
 
-mov     rcx,  r14           ;arg0 = r14
+mov     rdi,  r14           ;arg0 = r14
 call    _malloc             ;call malloc
 mov     r10,  rax           ;r10 = malloc(r14);
 
@@ -47,11 +41,5 @@ mov     r10,   rax          ;r10 = ft_memcpy(arg0, arg1, arg2);
 mov     rax,  r10           ;return (r10)
 exit:                       ;return malloc value 0
 
-pop     r10
-pop     r14
-pop     r15
-pop     rdx
-pop     rsi
-pop     rdi
 pop     rbp
 ret

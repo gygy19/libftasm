@@ -24,7 +24,7 @@ inc     r15
 
 mov     r14,   rsi
 push    rax
-mov     rcx,  r15           ;arg0 = r14
+mov     rdi,  r15           ;arg0 = r14
 call    _malloc             ;call malloc
 mov     r10,  rax           ;r10 = malloc(r14);
 pop     rax

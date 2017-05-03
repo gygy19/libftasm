@@ -16,7 +16,7 @@ extern _ft_strlen
 _ft_putstr:
 push	        rbp
 
-mov           rsi         ,[rbp + 8]      ;(1)set le pointer a afficher
+mov           rsi         ,rdi      ;(1)set le pointer a afficher
 call          _ft_strlen            ;cherche la longueur du text dans rdi
 mov           r10         ,rax
 ;write(rdi, rsi, rdx)               ;write(fd, pointer, length)

@@ -370,8 +370,19 @@ static void		Start(void)
 
 }
 
-int		main(void)
+void test_cat()
 {
-	Start();
+		ft_cat(0);
+		int fd = open("maintest.c", O_RDWR);
+		ft_cat(fd);
+		ft_cat(-42);
+}
+
+int		main(int argc, char **argv)
+{
+	if (argc == 1)
+		Start();
+	else if (strcmp(argv[1], "cat") == 0)
+		test_cat();
 	return (0);
 }

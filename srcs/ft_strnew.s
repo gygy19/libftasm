@@ -16,30 +16,18 @@ extern _malloc
 extern _ft_bzero
 _ft_strnew:
 push	        rbp
-push          r15
-push          r10
 
-mov     r15,   rdi          ;r15 = arg0
-inc     r15
+inc     rdi
 
-mov     r14,   rsi
-push    rax
-mov     rdi,  r15           ;arg0 = r14
-call    _malloc             ;call malloc
-mov     r10,  rax           ;r10 = malloc(r14);
-pop     rax
-mov     rsi,   r14
+call    _malloc                     ;call malloc
 
-push    rdi
-push    rsi
-mov     rsi,  r15
-mov     rdi,  r10
+if2: cmp byte[rax], 0
+    je end
+
+mov     rsi,  rdi
+mov     rdi,  rax
 call    _ft_bzero
-mov     rax,  r10
-pop     rsi
-pop     rdi
 
-pop           r10
-pop           r15
+end:
 pop           rbp
 ret

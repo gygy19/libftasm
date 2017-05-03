@@ -16,6 +16,8 @@ global _ft_strdup
 extern _malloc
 extern _ft_strlen
 extern _ft_memcpy
+extern _ft_strnew
+extern _ft_bzero
 
 _ft_strdup:
 push    rbp
@@ -26,11 +28,8 @@ call    _ft_strlen          ;ft_strlen(rdi);
 mov     r14,   rax          ;r14 = ft_strlen(arg0);
 
 mov     rdi,  r14           ;arg0 = r14
-call    _malloc             ;call malloc
-mov     r10,  rax           ;r10 = malloc(r14);
-
-if:     cmp r10, 0
-        je exit
+call    _ft_strnew
+mov     r10,  rax
 
 mov     rdi, r10            ;arg0 = r10 (char *dest)
 mov     rsi, r15            ;arg1 = r15 (char *src)

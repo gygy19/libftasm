@@ -48,7 +48,6 @@ int					ft_islower(int c);
 int					ft_isupper(int c);
 void        ft_putstr(const char *str);
 void        ft_putchar(char c);
-void		    ft_putnbr(long int n);
 char			  *ft_strnew(int c);
 char			  *ft_strjoin(char *s1, char *s2);
 

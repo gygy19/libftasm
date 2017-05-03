@@ -42,7 +42,6 @@ SRCBASE		=	\
 						ft_puts.s																														\
 						ft_putchar.s																												\
 						ft_putstr.s																													\
-						ft_putnbr.s																													\
 						ft_tolower.s																												\
 						ft_toupper.s																												\
 						ft_strcat.s																													\
@@ -109,7 +108,7 @@ all2:
 	fi
 
 test: all2
-	gcc maintest.c $(OBJS) -I includes/ -L . -lfts -o test 
+	gcc maintest.c $(OBJS) -I includes/ -L . -lfts -o test
 	./test
 
 .PHONY: all clean fclean re

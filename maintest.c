@@ -378,11 +378,35 @@ void test_cat()
 		ft_cat(-42);
 }
 
+void test_ft_strdup(char *arg)
+{
+		ft_putstr(ft_strdup(arg));
+}
+
+void test_ft_strndup(char *arg)
+{
+		ft_putstr(ft_strndup(arg, 1));
+}
+
+void test_ft_strjoin(char *arg1, char *arg2)
+{
+		ft_putstr(ft_strjoin(arg1, arg2));
+}
+
 int		main(int argc, char **argv)
 {
+
+	char *test = ft_strnew(10);
+	ft_putstr(ft_memcpy(test, "123", 3));
 	if (argc == 1)
 		Start();
-	else if (strcmp(argv[1], "cat") == 0)
+	else if (argc == 2 && strcmp(argv[1], "cat") == 0)
 		test_cat();
+	else if (argc == 3 && strcmp(argv[1], "strdup") == 0)
+		test_ft_strdup(argv[2]);
+	else if (argc == 3 && strcmp(argv[1], "strndup") == 0)
+			test_ft_strndup(argv[2]);
+	else if (argc == 4 && strcmp(argv[1], "strjoin") == 0)
+			test_ft_strjoin(argv[2], argv[3]);
 	return (0);
 }

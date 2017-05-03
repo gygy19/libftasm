@@ -62,11 +62,6 @@ while2:cmp r14 ,r12         ;while (r12 < r10)
       mov al  ,[rsi + r15]  ;al = r9[0]
       mov [r13 + r14], al   ;r8[i] = r9
 
-      push    rdi
-      mov     rdi,  [rsi + r15]
-      call    _ft_putchar
-      pop     rdi
-
       inc r14
       inc r15              ;r9++;
       jmp while2           ;}
